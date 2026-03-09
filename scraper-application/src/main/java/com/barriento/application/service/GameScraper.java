@@ -10,4 +10,8 @@ public class GameScraper implements GameScraperUseCase {
     private final GamePriceReportProvider gamePriceReportProvider;
     private final GamePriceReportPublisher gamePriceReportPublisher;
 
+    @Override
+    public void performScrap() {
+
+    }
 }

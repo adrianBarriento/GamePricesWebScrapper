@@ -5,9 +5,10 @@ info:
 paths:
   /api/v1/scrape:
     post:
-      summary: Dispara el scraping con paginacion
+      summary: Dispara el scraping por pagina y plataforma (opcional)
       tags:
         - ScrapingController
+      operationId: scrapePost
       requestBody:
         required: true
         content:
@@ -15,8 +16,13 @@ paths:
             schema:
               $ref: '#/components/schemas/ScrapePageRequestDto'
       responses:
-        '202':
+        '200':
           description: Scraping aceptado y procesándose
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScrapeResponseDto'
+
 components:
   schemas:
     ScrapePageRequestDto:
@@ -28,7 +34,32 @@ components:
           example: "2"
         platform:
           $ref: '#/components/schemas/PlatformDto'
-
-    PlatformDto:
+    ScrapeResponseDto:
       type: object
+      properties:
+        game:
+          $ref: '#/components/schemas/GameDto'
+        shopPriceInfo:
+          $ref: '#/components/schemas/ShopPriceInfoDto'
+    PlatformDto:
+      type: string
       enum: [PC, PS5]
+    GameDto:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Elden Ring"
+    ShopPriceInfoDto:
+      type: object
+      properties:
+        shopName:
+          type: string
+          example: "InstantGaming"
+        shopUri:
+          type: string
+          format: uri
+          example: "www.instantgaming.es/game/elden-ring"
+        price:
+          type: number
+          format: double
