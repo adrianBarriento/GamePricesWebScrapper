@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: Game Scraper API
+  version: 1.0.0
+paths:
+  /api/v1/scrape:
+    post:
+      summary: Dispara el scraping con paginacion
+      tags:
+        - ScrapingController
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScrapePageRequestDto'
+      responses:
+        '202':
+          description: Scraping aceptado y procesándose
+components:
+  schemas:
+    ScrapePageRequestDto:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          example: "2"
+        platform:
+          $ref: '#/components/schemas/PlatformDto'
+
+    PlatformDto:
+      type: object
+      enum: [PC, PS5]
