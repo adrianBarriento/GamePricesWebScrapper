@@ -1,5 +1,6 @@
 package com.barriento.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class GamePriceReport {
     private String gameTitle;
     private Platform platform;
